@@ -23,4 +23,19 @@ public class MemoryBookService {
 	public void setList(List<Book> list) {
 		this.list = list;
 	}
+	
+	public Book getBook(int bookIndex) {
+		for(int i = 0; i<list.size(); i ++) {
+			if(list.get(i).getId() == bookIndex) {
+				return list.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Book addBook(int id, String isbn, String title, String author, String publisher, String type) {
+		Book book = new Book(id, isbn, title, author, publisher, type);
+		list.add(book);
+		return book;
+	}
 }

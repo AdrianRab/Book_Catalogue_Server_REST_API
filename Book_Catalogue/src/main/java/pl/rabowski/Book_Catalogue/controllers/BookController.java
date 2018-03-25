@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.rabowski.Book_Catalogue.models.Book;
@@ -29,8 +32,20 @@ public class BookController	{
 	@Autowired
 	private MemoryBookService memoryBookService;
 	
-	@RequestMapping("/allbooks")
+	@RequestMapping("/allBooks")
 	public List<Book> listOfAllBooks(){
 		return memoryBookService.getList();
 	}
+	
+	@RequestMapping("/book/{id}")
+	public Book listOfAllBooks(@PathVariable int id){
+		return memoryBookService.getBook(id);
+	}
+	
+	@PostMapping(path="/addBook")
+	public Book addBook(@RequestParam  int id, @RequestParam  String  isbn, @RequestParam  String  title, 
+			@RequestParam  String  author, @RequestParam  String  publisher, @RequestParam  String  type){
+	return memoryBookService.addBook(id, isbn, title, author, publisher, type);
+	}
+	
 }
