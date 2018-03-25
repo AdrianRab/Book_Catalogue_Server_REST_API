@@ -1,11 +1,15 @@
 package pl.rabowski.Book_Catalogue.controllers;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.rabowski.Book_Catalogue.models.Book;
+import pl.rabowski.Book_Catalogue.models.MemoryBookService;
 
 @EnableAutoConfiguration
 @RestController
@@ -20,5 +24,13 @@ public class BookController	{
 	public	Book helloBook(){
 		return new Book(1,"9788324631766","Thinking	in	Java",
 			"Bruce	Eckel","Helion","programming");
+	}
+	
+	@Autowired
+	private MemoryBookService memoryBookService;
+	
+	@RequestMapping("/allbooks")
+	public List<Book> listOfAllBooks(){
+		return memoryBookService.getList();
 	}
 }

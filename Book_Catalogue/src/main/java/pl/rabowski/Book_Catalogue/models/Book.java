@@ -7,8 +7,7 @@ public class Book {
 	private String author;
 	private String publisher;
 	private String type;
-	
-	
+
 	public Book(int id, String isbn, String title, String author, String publisher, String type) {
 		this.id = id;
 		this.isbn = isbn;
@@ -17,42 +16,59 @@ public class Book {
 		this.publisher = publisher;
 		this.type = type;
 	}
-	
-	public Book() {}
-	
+
+	public Book() {
+	}
+
+	public String toStirng() {
+		return "id " + this.id + "\n isbn; " + this.isbn + "\n title: " + this.title + "\n author: " + this.author
+				+ "\n  publisher: " + this.publisher + "\n type: " + this.type;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
 	public String getPublisher() {
 		return publisher;
 	}
+
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
