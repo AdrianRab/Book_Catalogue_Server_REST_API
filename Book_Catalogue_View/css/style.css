@@ -1,0 +1,26 @@
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: center;
+}​
+
+.field {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 250px;
+    margin-left: 100px;
+
+    color: blue;
+}
+
+#addBook{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 250px;
+  margin-left: 150px;
+}
+
+#allBooks{
+  margin-right: 250px;
+  margin-left: 150px;
+}

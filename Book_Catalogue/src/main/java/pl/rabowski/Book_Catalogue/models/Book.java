@@ -1,14 +1,17 @@
 package pl.rabowski.Book_Catalogue.models;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Book {
-	private int id;
+	private long id;
 	private String isbn;
 	private String title;
 	private String author;
 	private String publisher;
 	private String type;
+	static final AtomicLong counter = new AtomicLong(1);
 
-	public Book(int id, String isbn, String title, String author, String publisher, String type) {
+	public Book(long id, String isbn, String title, String author, String publisher, String type) {
 		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
@@ -25,7 +28,7 @@ public class Book {
 				+ "\n  publisher: " + this.publisher + "\n type: " + this.type;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
