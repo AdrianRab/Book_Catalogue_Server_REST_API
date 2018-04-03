@@ -7,7 +7,7 @@ import java.util.ListIterator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MemoryBookService {
+public class MemoryBookService implements BookService {
 	private List<Book> list;
 
 	public MemoryBookService() {
@@ -19,48 +19,53 @@ public class MemoryBookService {
 				"programming"));
 	}
 
+	@Override
 	public List<Book> getList() {
 		return list;
 	}
 
+	@Override
 	public void setList(List<Book> list) {
 		this.list = list;
 	}
 
+	@Override	
 	public Book getBook(int bookIndex) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getId() == bookIndex) {
 				return list.get(i);
 			}
 		}
-			return null;
+		return null;
+	}
+	@Override
+	public void addBook(String isbn, String title, String author, String publisher, String type) {
+		//			int id = list.get(list.size() - 1).getId() + 1;
+		long id = Book.counter.getAndIncrement();
+		Book book = new Book( id, isbn, title, author, publisher, type);
+		list.add(book);
+//		return book;
 	}
 
-		public Book addBook(String isbn, String title, String author, String publisher, String type) {
-//			int id = list.get(list.size() - 1).getId() + 1;
-			long id = Book.counter.getAndIncrement();
-			Book book = new Book(id, isbn, title, author, publisher, type);
-			list.add(book);
-			return book;
-		}
+	@Override
+	public void editBook(int id, String isbn, String title, String author, String publisher, String type) {
+		Book editedBook = this.getBook(id);
+		editedBook.setIsbn(isbn);
+		editedBook.setTitle(title);
+		editedBook.setAuthor(author);
+		editedBook.setPublisher(publisher);
+		editedBook.setType(type);
+//		return editedBook;
+	}
 
-		public Book editBook(int id, String isbn, String title, String author, String publisher, String type) {
-			Book editedBook = this.getBook(id);
-			editedBook.setIsbn(isbn);
-			editedBook.setTitle(title);
-			editedBook.setAuthor(author);
-			editedBook.setPublisher(publisher);
-			editedBook.setType(type);
-			return editedBook;
-		}
-
-		public void deleteBook(int id) {
-			ListIterator<Book> iterator = list.listIterator();
-			while(iterator.hasNext()) {
-				if(iterator.next().getId() == id) {
-					iterator.remove();
-				}
+	@Override
+	public void deleteBook(int id) {
+		ListIterator<Book> iterator = list.listIterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getId() == id) {
+				iterator.remove();
 			}
-//			list.remove(this.getBook(id));
 		}
+		//			list.remove(this.getBook(id));
 	}
+}

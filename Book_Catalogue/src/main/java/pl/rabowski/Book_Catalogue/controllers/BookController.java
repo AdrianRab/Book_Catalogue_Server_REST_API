@@ -46,15 +46,15 @@ public class BookController {
 	}
 	
 	@PostMapping(path = "/")
-	public Book addBook (@RequestParam String isbn, @RequestParam String title,
+	public void addBook (@RequestParam String isbn, @RequestParam String title,
 			@RequestParam String author, @RequestParam String publisher, @RequestParam String type) {
-		return memoryBookService.addBook(isbn, title, author, publisher, type);
+		 memoryBookService.addBook(isbn, title, author, publisher, type);
 	}
 	
 	@PutMapping(path = "/editBook/{id}")
-	public Book editBook(@PathVariable int id, @RequestParam String isbn, @RequestParam String title,
+	public void editBook(@PathVariable int id, @RequestParam String isbn, @RequestParam String title,
 			@RequestParam String author, @RequestParam String publisher, @RequestParam String type) {
-		return memoryBookService.editBook(id, isbn, title, author, publisher, type);
+		memoryBookService.editBook(id, isbn, title, author, publisher, type);
 	}
 	
 	@DeleteMapping(path="/deleteBook/{id}")
