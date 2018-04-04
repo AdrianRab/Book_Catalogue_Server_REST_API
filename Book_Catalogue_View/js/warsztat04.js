@@ -74,7 +74,6 @@ $(document).ready(function(){
           });
       };
 
-      // działa - dataType nie moze mieć wartości application/json
     function addBook(){
         var form = $('#add-book');
         var book = {

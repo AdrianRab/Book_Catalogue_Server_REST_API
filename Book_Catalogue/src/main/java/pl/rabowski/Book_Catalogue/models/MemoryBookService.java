@@ -29,7 +29,7 @@ public class MemoryBookService implements BookService {
 		this.list = list;
 	}
 
-	@Override	
+	@Override
 	public Book getBook(int bookIndex) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getId() == bookIndex) {
@@ -38,13 +38,19 @@ public class MemoryBookService implements BookService {
 		}
 		return null;
 	}
+	// @Override
+	// public void addBook(String isbn, String title, String author, String
+	// publisher, String type) {
+	// // int id = list.get(list.size() - 1).getId() + 1;
+	// long id = Book.counter.getAndIncrement();
+	// Book book = new Book( id, isbn, title, author, publisher, type);
+	// list.add(book);
+	//// return book;
+	// }
+
 	@Override
-	public void addBook(String isbn, String title, String author, String publisher, String type) {
-		//			int id = list.get(list.size() - 1).getId() + 1;
-		long id = Book.counter.getAndIncrement();
-		Book book = new Book( id, isbn, title, author, publisher, type);
+	public void addBook(Book book) {
 		list.add(book);
-//		return book;
 	}
 
 	@Override
@@ -55,17 +61,15 @@ public class MemoryBookService implements BookService {
 		editedBook.setAuthor(author);
 		editedBook.setPublisher(publisher);
 		editedBook.setType(type);
-//		return editedBook;
 	}
 
 	@Override
 	public void deleteBook(int id) {
 		ListIterator<Book> iterator = list.listIterator();
-		while(iterator.hasNext()) {
-			if(iterator.next().getId() == id) {
+		while (iterator.hasNext()) {
+			if (iterator.next().getId() == id) {
 				iterator.remove();
 			}
 		}
-		//			list.remove(this.getBook(id));
 	}
 }

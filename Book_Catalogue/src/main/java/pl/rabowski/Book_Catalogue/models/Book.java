@@ -9,7 +9,7 @@ public class Book {
 	private String author;
 	private String publisher;
 	private String type;
-	static final AtomicLong counter = new AtomicLong(1);
+	public static final AtomicLong counter = new AtomicLong(1);
 
 	public Book(long id, String isbn, String title, String author, String publisher, String type) {
 		this.id = id;
@@ -40,7 +40,7 @@ public class Book {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
