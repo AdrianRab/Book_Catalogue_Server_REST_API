@@ -1,4 +1,4 @@
-package pl.rabowski.Book_Catalogue.models;
+package pl.rabowski.book_catalogue.models;
 
 import java.util.concurrent.atomic.AtomicLong;
 

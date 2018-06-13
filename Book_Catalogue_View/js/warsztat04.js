@@ -49,8 +49,11 @@ $(document).ready(function(){
               var deleteBook = $('<button>').text('Delete ' + json[i].title);
               deleteBook.addClass('button is-danger delete-button');
 
+              var editBook = $('<button>').text('Edit ' + json[i].title);
+              editBook.addClass('button is-info edit-button');
+
               emptyDiv.append(space, author, publisher, type, isbn, space);
-              buttons.append(showDetailsBtn, space, deleteBook)
+              buttons.append(showDetailsBtn, space, deleteBook, space, editBook)
               title.append(space, emptyDiv, space, buttons, space, space);
               newBook.append(title);
               allBooks.append(newBook);

@@ -1,10 +1,12 @@
-package pl.rabowski.Book_Catalogue.models;
+package pl.rabowski.book_catalogue.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 import org.springframework.stereotype.Component;
+
+import pl.rabowski.book_catalogue.models.Book;
 
 @Component
 public class MemoryBookService implements BookService {
@@ -38,15 +40,6 @@ public class MemoryBookService implements BookService {
 		}
 		return null;
 	}
-	// @Override
-	// public void addBook(String isbn, String title, String author, String
-	// publisher, String type) {
-	// // int id = list.get(list.size() - 1).getId() + 1;
-	// long id = Book.counter.getAndIncrement();
-	// Book book = new Book( id, isbn, title, author, publisher, type);
-	// list.add(book);
-	//// return book;
-	// }
 
 	@Override
 	public void addBook(Book book) {

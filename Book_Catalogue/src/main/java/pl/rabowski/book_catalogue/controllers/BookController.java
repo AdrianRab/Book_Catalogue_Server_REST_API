@@ -1,10 +1,9 @@
-package pl.rabowski.Book_Catalogue.controllers;
+package pl.rabowski.book_catalogue.controllers;
 
 import java.util.List;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.rabowski.Book_Catalogue.models.Book;
-import pl.rabowski.Book_Catalogue.models.MemoryBookService;
+import pl.rabowski.book_catalogue.models.Book;
+import pl.rabowski.book_catalogue.service.MemoryBookService;
 
 @CrossOrigin(origins = "http://localhost:8090")
 @EnableAutoConfiguration
@@ -50,25 +50,18 @@ public class BookController {
 		return memoryBookService.getBook(id);
 	}
 
+	//problem z parsowaniem na JSONa - poczytać bo wrzuca SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
+	//produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes = MediaType.ALL_VALUE
 	@PostMapping(path = "/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addBook(@RequestBody Book book) {
+	@ResponseBody
+	public String addBook(@RequestBody Book book) {
 		long id = Book.counter.getAndIncrement();
 		book.setId(id);
 		memoryBookService.addBook(book);
-		return Response.status(201).entity(book).build();
+		return  "Congratz, it's working";
 	}
-
-	// w poniższym przypadku mam SyntaxError: JSON.parse: unexpected end of data at
-	// line 1 column 1 of the JSON data, w powyższym tylko error...
-	// @PostMapping(path = "/")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public void addBook (@RequestBody Book book) {
-	// long id = Book.counter.getAndIncrement();
-	// book.setId(id);
-	// memoryBookService.addBook(book);
-	// }
-
+	
 	@PutMapping(path = "/editBook/{id}")
 	public void editBook(@PathVariable int id, @RequestParam String isbn, @RequestParam String title,
 			@RequestParam String author, @RequestParam String publisher, @RequestParam String type) {

@@ -1,4 +1,4 @@
-package pl.rabowski.Book_Catalogue;
+package pl.rabowski.book_catalogue;
 
 import java.io.IOException;
 
