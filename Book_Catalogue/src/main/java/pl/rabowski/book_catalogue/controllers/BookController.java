@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.rabowski.book_catalogue.models.Book;
@@ -50,11 +49,8 @@ public class BookController {
 		return memoryBookService.getBook(id);
 	}
 
-	//problem z parsowaniem na JSONa - poczytać bo wrzuca SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
-	//produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes = MediaType.ALL_VALUE
 	@PostMapping(path = "/")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ResponseBody
 	public String addBook(@RequestBody Book book) {
 		long id = Book.counter.getAndIncrement();
 		book.setId(id);
@@ -63,6 +59,7 @@ public class BookController {
 	}
 	
 	@PutMapping(path = "/editBook/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public void editBook(@PathVariable int id, @RequestParam String isbn, @RequestParam String title,
 			@RequestParam String author, @RequestParam String publisher, @RequestParam String type) {
 		memoryBookService.editBook(id, isbn, title, author, publisher, type);

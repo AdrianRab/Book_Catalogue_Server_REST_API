@@ -2,7 +2,7 @@
 <html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
-    <title>Warsztat 05</title>
+    <title>Book catalogue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,58 +13,58 @@
 </head>
 <body>
   <section class="hero is-primary">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">List of available books</h1>
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">List of available books</h1>
+      </div>
     </div>
+  </section>
+  <br>
+  <div id="confirmation"></div>
+  <div class="field" id="addBook">
+     <h2 class="label title is-4">Add new book</h2>
+        <form class="add-book-form"  id="add-book" method="post">
+          <div class="field">
+            <label class="label">Title</label>
+              <div class="control">
+                <input id='newTitle' class="input" type="text"  name="title" placeholder="e.g. Clean Code">
+              </div>
+            </div>
+
+      <div class="field">
+        <label class="label">Author</label>
+          <div class="control">
+            <input id='newAuthor' class="input" type="text" name='author' placeholder="e.g Rober Martin">
+          </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Publisher</label>
+          <div class="control">
+            <input id='newPublisher' class="input" type="text" name='publisher' placeholder="e.g. Helion">
+          </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Genre</label>
+          <div class="control">
+            <input id='newGenre' class="input" type="text" name='genre' placeholder="e.g. programming">
+          </div>
+      </div>
+
+      <div class="field">
+        <label class="label">ISBN number</label>
+          <div class="control">
+            <input id='newIsbn' class="input" type="text" name='isbn' placeholder="e.g. 9788324631766">
+          </div>
+      </div>
+      <div class="control">
+        <input class="button is-success" type="submit"value="Submit">
+        <input class="button is-danger" type="reset" value="Reset">
+      </div>
+    </form>
   </div>
-</section>
-<br>
-<div id="confirmation"></div>
-<div class="field" id="addBook">
-   <h2 class="label title is-4">Add new book</h2>
-      <form class="add-book-form"  id="add-book" method="post">
-        <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input id='newTitle' class="input" type="text"  name="title" placeholder="e.g. Clean Code">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Author</label>
-      <div class="control">
-        <input id='newAuthor' class="input" type="text" name='author' placeholder="e.g Rober Martin">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Publisher</label>
-      <div class="control">
-        <input id='newPublisher' class="input" type="text" name='publisher' placeholder="e.g. Helion">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Genre</label>
-      <div class="control">
-        <input id='newGenre' class="input" type="text" name='genre' placeholder="e.g. programming">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">ISBN number</label>
-      <div class="control">
-        <input id='newIsbn' class="input" type="text" name='isbn' placeholder="e.g. 9788324631766">
-      </div>
-    </div>
-    <div class="control">
-      <input class="button is-success" type="submit"value="Submit">
-      <input class="button is-danger" type="reset" value="Reset">
-    </div>
-  </form>
-</div>
-<br>
+  <br>
 
   <div id="deleteConfirmation"></div>
   <div id="allBooks">

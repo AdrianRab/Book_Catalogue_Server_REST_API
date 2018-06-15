@@ -60,6 +60,7 @@ $(document).ready(function(){
             }
             showBookDetails();
             removeBook();
+            updateBook();
           })
   				.fail(function(xhr,	status,
   				      errorThrown){
@@ -170,6 +171,96 @@ $(document).ready(function(){
        .always(function () {
          $('#confirmation').children().remove();
          console.log("Remove book function ended");
+       });
+     });
+   };
+
+   function updateBook(){
+     var editButton = $('.edit-button');
+     editButton.on('click', function(event){
+       var divField = $('<div>');
+       divField.addClass('field');
+       divField.attr("id","edit-book");
+       var formInput = $('<form>');
+       formInput.attr("method", "PUT");
+       formInput.addClass('list-group-item-action edit-book-form');
+       var titleLabel = $('<label>').text('Title');
+       titleLabel.addClass('label');
+       var authorLabel = $('<label>').text('Author');
+       titleLabel.addClass('label');
+       var publisherLabel = $('<label>').text('Publisher');
+       titleLabel.addClass('label');
+       var genreLabel = $('<label>').text('Genre');
+       titleLabel.addClass('label');
+       var isbnLabel = $('<label>').text('ISBN number');
+       titleLabel.addClass('label');
+       var divControl = $('<div>');
+       divControl.addClass('control');
+       var titleInput =   $("<input type='text' />")
+        .attr("id", "titleUpdated")
+        .attr("name", "title");
+       titleInput.addClass('input');
+       var authorInput =   $("<input type='text' />")
+        .attr("id", "authorUpdated")
+        .attr("name", "author");
+       authorInput.addClass('input');
+       var publisherInput =   $("<input type='text' />")
+        .attr("id", "publisherUpdated")
+        .attr("name", "publisher");
+       publisherInput.addClass('input');
+       var genreInput =   $("<input type='text' />")
+        .attr("id", "genreUpdated")
+        .attr("name", "genre");
+       genreInput.addClass('input');
+       var isbnInput =   $("<input type='text' />")
+        .attr("id", "isbnUpdated")
+        .attr("name", "isbn");
+       isbnInput.addClass('input');
+       var submitButton = $("<input type='submit' value='Submit' />");
+       submitButton.addClass('button is-success');
+       var resetButton = $("<input type='reset' value='Reset' />");
+       submitButton.addClass('button is-danger');
+
+      //  dodac dodawaine formularza na klikniecie z powyzszych elementow
+
+      var bookToEdit = $(this).parent().parent().text();
+       console.log(bookToEdit);
+       var id = bookToEdit.substring(0,bookToEdit.indexOf('.'));
+       var form = $('#edit-book');
+
+       form.submit(function(event){
+         event.preventDefault;
+         $.ajax({
+           url:"http://localhost:8090/books/editBook/"+ id,
+           type: 'PUT',
+         })
+         .done(function (response, textStatus, jqXHR){
+             console.log("Book successfully edited.");
+             $('#confirmation').children().remove();
+             $('.list-group-item').remove();
+             var confirmationMessage = $('<h2>').text('Book has been succesfully edited');
+             var confirmationDiv =$('#confirmation');
+             confirmationDiv.css({"color": "green", "font-size": "200%", "align": "center"});
+             confirmationDiv.append(confirmationMessage);
+             $('#newTitle').val("");
+             $('#newAuthor').val("");
+             $('#newPublisher').val("");
+             $('#newGenre').val("");
+             $('#newIsbn').val("");
+             allBooksList();
+         })
+         .fail(function (xhr, status, errorThrown){
+             console.error("The following error occurred during edition: "+ status, errorThrown);
+             $('#confirmation').children().remove();
+             var confirmationMessage = $('<h2>').text('Error. Book has not been edited');
+             var confirmationDiv =$('#confirmation');
+             confirmationDiv.css({"color": "red", "font-size": "200%", "text-align": "center"});
+             confirmationDiv.append(confirmationMessage);
+         })
+         .always(function () {
+           $('#deleteConfirmation').children().remove();
+           console.log("Edit book function ended");
+         });
        });
      });
    };
