@@ -1,0 +1,2 @@
+Server REST API to catalogue books. Combined with Client REST API. Technologies used: Java, Spring Boot, Spring MVC.
+Allows to read, add, edit and remove books.

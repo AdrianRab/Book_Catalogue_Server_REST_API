@@ -3,7 +3,7 @@ $(document).ready(function(){
 
   allBooksList();
   addBook();
-
+  updateBook();
 
   function allBooksList() {
     $.ajax({
@@ -14,7 +14,7 @@ $(document).ready(function(){
         })
   				.done(function(json){
             var	newBook	=	$('<li>');
-            newBook.addClass('list-group-item'); //stylowanie boostrapem
+            newBook.addClass('list-group-item');
             for (var i = 0; i < json.length; i++) {
               var title = $('<div>').text(json[i].id + '. '+ json[i].title);
               title.addClass('list-group-item-action book-title');
@@ -57,10 +57,92 @@ $(document).ready(function(){
               title.append(space, emptyDiv, space, buttons, space, space);
               newBook.append(title);
               allBooks.append(newBook);
+
+
+              var divField = $('<div>').hide();
+              divField.addClass('field');
+              divField.attr("id","edit-book");
+
+              var formInput = $('<form>');
+              formInput.attr("method", "PUT");
+              formInput.addClass('list-group-item-action edit-book-form');
+
+              var divTitle = $('<div>').addClass('field');
+              var divAuthor = $('<div>').addClass('field');
+              var divPublisher = $('<div>').addClass('field');
+              var divGenre = $('<div>').addClass('field');
+              var divIsbn = $('<div>').addClass('field');
+              var divTitleControl = $('<div>').addClass('control');
+              var divAuthorControl = $('<div>').addClass('control');
+              var divPublisherControl = $('<div>').addClass('control');
+              var divGenreControl = $('<div>').addClass('control');
+              var divIsbnControl = $('<div>').addClass('control');
+              var divButtonsControl = $('<div>').addClass('control');
+
+              var titleLabel = $('<label>').text('Title');
+              titleLabel.addClass('label');
+
+              var authorLabel = $('<label>').text('Author');
+              titleLabel.addClass('label');
+
+              var publisherLabel = $('<label>').text('Publisher');
+              titleLabel.addClass('label');
+
+              var genreLabel = $('<label>').text('Genre');
+              titleLabel.addClass('label');
+
+              var isbnLabel = $('<label>').text('ISBN number');
+              titleLabel.addClass('label');
+
+              var titleInput =   $("<input type='text' />")
+                .attr("id", "titleUpdated")
+                .attr("name", "title");
+              titleInput.addClass('input');
+
+              var authorInput =   $("<input type='text' />")
+                .attr("id", "authorUpdated")
+                .attr("name", "author");
+                authorInput.addClass('input');
+
+              var publisherInput =   $("<input type='text' />")
+                .attr("id", "publisherUpdated")
+                .attr("name", "publisher");
+                publisherInput.addClass('input');
+
+              var genreInput =   $("<input type='text' />")
+                .attr("id", "genreUpdated")
+                .attr("name", "genre");
+                genreInput.addClass('input');
+
+              var isbnInput =   $("<input type='text' />")
+                .attr("id", "isbnUpdated")
+                .attr("name", "isbn");
+                isbnInput.addClass('input');
+
+              var submitButton = $("<input type='submit' value='Submit' />");
+                submitButton.addClass('button is-success');
+
+              var resetButton = $("<input type='reset' value='Reset' />");
+                resetButton.addClass('button is-danger');
+
+               divButtonsControl.append(submitButton, resetButton);
+               divIsbnControl.append(isbnInput);
+               divGenreControl.append(genreInput);
+               divPublisherControl.append(publisherInput);
+               divAuthorControl.append(authorInput);
+               divTitleControl.append(titleInput);
+               divIsbn.append(isbnLabel, divIsbnControl);
+               divGenre.append(genreLabel, divGenreControl);
+               divPublisher.append(publisherLabel, divPublisherControl);
+               divAuthor.append(authorLabel, divAuthorControl);
+               divTitle.append(titleLabel,divTitleControl);
+               formInput.append(divTitle, divAuthor, divPublisher, divGenre, divIsbn, divButtonsControl);
+               divField.append(formInput);
+               title.append(divField, space, space);
             }
             showBookDetails();
+            showFormForEdition();
             removeBook();
-            updateBook();
           })
   				.fail(function(xhr,	status,
   				      errorThrown){
@@ -69,7 +151,7 @@ $(document).ready(function(){
   				.always(function(xhr,	status	){
             console.log("Title upload - finished");
               });
-        }
+        };
 
     function showBookDetails() {
       var showButton = $('.show');
@@ -138,10 +220,7 @@ $(document).ready(function(){
         });
     };
 
-    console.log($('.delete-button'));
-    console.log($('.show'));
-
-   function removeBook() {
+    function removeBook() {
      var deleteButton = $('.delete-button');
      deleteButton.on('click', function(event) {
        var bookToDelete = $(this).parent().parent().text();
@@ -173,66 +252,37 @@ $(document).ready(function(){
          console.log("Remove book function ended");
        });
      });
-   };
+    };
 
    function updateBook(){
-     var editButton = $('.edit-button');
-     editButton.on('click', function(event){
-       var divField = $('<div>');
-       divField.addClass('field');
-       divField.attr("id","edit-book");
-       var formInput = $('<form>');
-       formInput.attr("method", "PUT");
-       formInput.addClass('list-group-item-action edit-book-form');
-       var titleLabel = $('<label>').text('Title');
-       titleLabel.addClass('label');
-       var authorLabel = $('<label>').text('Author');
-       titleLabel.addClass('label');
-       var publisherLabel = $('<label>').text('Publisher');
-       titleLabel.addClass('label');
-       var genreLabel = $('<label>').text('Genre');
-       titleLabel.addClass('label');
-       var isbnLabel = $('<label>').text('ISBN number');
-       titleLabel.addClass('label');
-       var divControl = $('<div>');
-       divControl.addClass('control');
-       var titleInput =   $("<input type='text' />")
-        .attr("id", "titleUpdated")
-        .attr("name", "title");
-       titleInput.addClass('input');
-       var authorInput =   $("<input type='text' />")
-        .attr("id", "authorUpdated")
-        .attr("name", "author");
-       authorInput.addClass('input');
-       var publisherInput =   $("<input type='text' />")
-        .attr("id", "publisherUpdated")
-        .attr("name", "publisher");
-       publisherInput.addClass('input');
-       var genreInput =   $("<input type='text' />")
-        .attr("id", "genreUpdated")
-        .attr("name", "genre");
-       genreInput.addClass('input');
-       var isbnInput =   $("<input type='text' />")
-        .attr("id", "isbnUpdated")
-        .attr("name", "isbn");
-       isbnInput.addClass('input');
-       var submitButton = $("<input type='submit' value='Submit' />");
-       submitButton.addClass('button is-success');
-       var resetButton = $("<input type='reset' value='Reset' />");
-       submitButton.addClass('button is-danger');
-
-      //  dodac dodawaine formularza na klikniecie z powyzszych elementow
-
       var bookToEdit = $(this).parent().parent().text();
        console.log(bookToEdit);
        var id = bookToEdit.substring(0,bookToEdit.indexOf('.'));
        var form = $('#edit-book');
+       console.log(id);
 
        form.submit(function(event){
          event.preventDefault;
+
+        var book = getJSONBook(id);
+
+         book.title = $('#titleUpdated').val();
+         book.author = $('#authorUpdated').val();
+         book.publisher = $('#publisherUpdated').val();
+         book.type = $('#genreUpdated').val();
+         book.isbn = $('#isbnUpdated').val();
+         console.log($('#newTitle').val());
+         console.log(book.id);
+         console.log(book.title);
+
          $.ajax({
            url:"http://localhost:8090/books/editBook/"+ id,
+           headers: {'Accept': 'application/json',
+           'Content-Type': 'application/json'},
            type: 'PUT',
+           data: JSON.stringify(book),
+           dataType: 'json',
+           contentType: "application/json; charset=utf-8",
          })
          .done(function (response, textStatus, jqXHR){
              console.log("Book successfully edited.");
@@ -242,18 +292,13 @@ $(document).ready(function(){
              var confirmationDiv =$('#confirmation');
              confirmationDiv.css({"color": "green", "font-size": "200%", "align": "center"});
              confirmationDiv.append(confirmationMessage);
-             $('#newTitle').val("");
-             $('#newAuthor').val("");
-             $('#newPublisher').val("");
-             $('#newGenre').val("");
-             $('#newIsbn').val("");
              allBooksList();
          })
          .fail(function (xhr, status, errorThrown){
              console.error("The following error occurred during edition: "+ status, errorThrown);
              $('#confirmation').children().remove();
              var confirmationMessage = $('<h2>').text('Error. Book has not been edited');
-             var confirmationDiv =$('#confirmation');
+             var confirmagetJSONBooktionDiv =$('#confirmation');
              confirmationDiv.css({"color": "red", "font-size": "200%", "text-align": "center"});
              confirmationDiv.append(confirmationMessage);
          })
@@ -262,7 +307,37 @@ $(document).ready(function(){
            console.log("Edit book function ended");
          });
        });
-     });
+     };
+
+   function getJSONBook(id){
+     $.ajax({
+           url:'http://localhost:8090/books/allBooks',
+           data: {},
+           type:"GET",
+           dataType: "json",
+         }).done(function(json){
+           for (var i = 0; i < json.length; i++) {
+             if (json[i].id === id) {
+               console.log(json[i].title);
+               return json[i];
+             }else {
+               return null;
+             }
+           }
+        })
+        .fail(function (xhr, status, errorThrown){
+           console.error("The following error occurred during JSON object function: "+ status, errorThrown);
+        })
+        .always(function () {
+          console.log("Find JSON object function ended");
+        });
+   };
+
+   function showFormForEdition(){
+     var editButton = $('.edit-button');
+     editButton.on('click', function(){
+       $(this).parent().siblings('div').toggle(500);
+       });
    };
 
 });
