@@ -34,5 +34,4 @@ public class ControllerExceptionHandler {
 		fieldErrors.stream().map(fieldError-> new FieldErrorMessage(fieldError.getField(), fieldError.getDefaultMessage())).collect(Collectors.toList());
 		return fieldErrors;
 	}
-
 }

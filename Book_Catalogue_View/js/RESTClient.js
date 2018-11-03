@@ -7,7 +7,7 @@ $(document).ready(function(){
 
   function allBooksList() {
     $.ajax({
-  				url:	'http://localhost:8090/books/allBooks',
+  				url:	'http://localhost:8090/books/all',
           data: {},
           type:"GET",
           dataType: "json",
@@ -226,6 +226,10 @@ $(document).ready(function(){
        var bookToDelete = $(this).parent().parent().text();
        var id = bookToDelete.substring(0,bookToDelete.indexOf('.'));
        $.ajax({
+         headers: {'Accept': 'application/json',
+         'Content-Type': 'application/json'},
+         dataType: 'json',
+         contentType: "application/json; charset=utf-8",
          url: "http://localhost:8090/books/"+ id,
          type: 'DELETE',
        })
