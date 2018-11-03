@@ -2,12 +2,18 @@ package pl.rabowski.book_catalogue.models;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.validation.constraints.NotNull;
+
 public class Book {
 	private long id;
 	private String isbn;
+	@NotNull
 	private String title;
+	@NotNull
 	private String author;
+	@NotNull
 	private String publisher;
+	@NotNull
 	private String type;
 	public static final AtomicLong counter = new AtomicLong(1);
 

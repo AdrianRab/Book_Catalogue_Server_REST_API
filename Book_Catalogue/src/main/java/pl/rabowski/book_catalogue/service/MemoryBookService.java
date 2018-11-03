@@ -32,7 +32,7 @@ public class MemoryBookService implements BookService {
 	}
 
 	@Override
-	public Book getBook(int bookIndex) {
+	public Book getBook(long bookIndex) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getId() == bookIndex) {
 				return list.get(i);

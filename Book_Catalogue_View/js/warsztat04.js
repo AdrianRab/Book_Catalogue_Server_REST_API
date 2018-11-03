@@ -226,7 +226,7 @@ $(document).ready(function(){
        var bookToDelete = $(this).parent().parent().text();
        var id = bookToDelete.substring(0,bookToDelete.indexOf('.'));
        $.ajax({
-         url: "http://localhost:8090/books/deleteBook/"+ id,
+         url: "http://localhost:8090/books/"+ id,
          type: 'DELETE',
        })
        .done(function (response, textStatus, jqXHR){
@@ -276,7 +276,7 @@ $(document).ready(function(){
          console.log(book.title);
 
          $.ajax({
-           url:"http://localhost:8090/books/editBook/"+ id,
+           url:"http://localhost:8090/books/"+ id,
            headers: {'Accept': 'application/json',
            'Content-Type': 'application/json'},
            type: 'PUT',
@@ -311,10 +311,13 @@ $(document).ready(function(){
 
    function getJSONBook(id){
      $.ajax({
-           url:'http://localhost:8090/books/allBooks',
+          headers: {'Accept': 'application/json',
+          'Content-Type': 'application/json'},
+           url:'http://localhost:8090/books/' + id,
            data: {},
            type:"GET",
            dataType: "json",
+           contentType: "application/json; charset=utf-8",
          }).done(function(json){
            for (var i = 0; i < json.length; i++) {
              if (json[i].id === id) {

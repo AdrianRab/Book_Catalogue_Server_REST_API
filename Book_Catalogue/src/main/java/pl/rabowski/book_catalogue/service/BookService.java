@@ -10,7 +10,7 @@ public interface BookService {
 
 	public void setList(List<Book> list);
 
-	public Book getBook(int bookIndex);
+	public Book getBook(long bookIndex);
 
 	public void addBook(Book book);
 
